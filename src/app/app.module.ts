@@ -7,6 +7,7 @@ import { FormsModule } from '@angular/forms';
 import { AppComponent } from './app.component';
 import { PostComponent } from './post/post.component';
 import { HttpClientModule } from '@angular/common/http';
+import { AddCommentComponent } from './add-comment/add-comment.component';
 
 const appRoutes: Routes = [
   {
@@ -19,7 +20,8 @@ const appRoutes: Routes = [
 @NgModule({
   declarations: [
     AppComponent,
-    PostComponent
+    PostComponent,
+    AddCommentComponent
   ],
   imports: [
     RouterModule.forRoot(appRoutes),

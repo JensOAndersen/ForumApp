@@ -6,9 +6,38 @@
   </button>
 </div>
 
-<ul
-  class="posts">
-  <li *ngFor="let p of posts">
-    test
-  </li>
-</ul>
+<div 
+  class="Post"
+  *ngFor="let p of posts">
+
+  <div class="userProfile" >
+    <h3>{{p.user.name}}</h3>
+    <span>member since: </span>{{p.user.creationDate | date:'short'}}
+  </div>
+  
+  <div class="postContent">
+    
+    <div class="postText">
+      <h4>{{p.title}}</h4>
+      <p>{{p.content}}</p>
+      <br>
+      <div class="date">
+        <span>thread created on: </span> {{p.postDate | date:'short'}}
+      </div>
+    </div>
+
+    <hr>
+   
+    <div
+    class="comment"
+    *ngFor="let c of p.comments">
+      <h5>{{c.user.name}}:</h5>
+      <p>{{c.content}}</p>
+      <div class="date">
+        <span>comment created on: </span>{{c.postDate | date:'short'}}
+      </div>
+    </div>
+    <app-add-comment [postinfo]=p></app-add-comment>
+    
+  </div>
+</div>
