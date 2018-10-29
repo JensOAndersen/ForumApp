@@ -1,28 +1,19 @@
-<h2>Post list</h2>
-
-<div>
-  <button>
-    Add
-  </button>
-</div>
-
 <div 
-  class="Post"
-  *ngFor="let p of posts">
+  class="Post">
 
   <div class="userProfile" >
-    <h3>{{p.user.name}}</h3>
-    <span>member since: </span>{{p.user.creationDate | date:'short'}}
+    <h3>{{post?.user?.name}}</h3>
+    <span>member since: </span>{{post?.user?.creationDate | date:'short'}}
   </div>
   
   <div class="postContent">
     
     <div class="postText">
-      <h4>{{p.title}}</h4>
-      <p>{{p.content}}</p>
+      <h4>{{post.title}}</h4>
+      <p>{{post.content}}</p>
       <br>
       <div class="date">
-        <span>thread created on: </span> {{p.postDate | date:'short'}}
+        <span>thread created on: </span> {{post.postDate | date:'short'}}
       </div>
     </div>
 
@@ -30,14 +21,15 @@
    
     <div
     class="comment"
-    *ngFor="let c of p.comments">
+    *ngFor="let c of post.comments">
       <h5>{{c.user.name}}:</h5>
       <p>{{c.content}}</p>
       <div class="date">
         <span>comment created on: </span>{{c.postDate | date:'short'}}
       </div>
+      <button (click)="deleteComment(c.commentId)">Delete this comment</button>
     </div>
-    <app-add-comment [postinfo]=p></app-add-comment>
-    
+    <app-add-comment (commentPosted)='commentPosted()' [postinfo]=post></app-add-comment>
+    <button (click)="goBack()">tilbage</button>
   </div>
 </div>

@@ -8,12 +8,27 @@ import { AppComponent } from './app.component';
 import { PostComponent } from './post/post.component';
 import { HttpClientModule } from '@angular/common/http';
 import { AddCommentComponent } from './add-comment/add-comment.component';
+import { PostOverviewComponent } from './post-overview/post-overview.component';
+import { CommentComponent } from './comment/comment.component';
+import { Post } from './post';
 
 const appRoutes: Routes = [
   {
+    path:'',
+    redirectTo:'/posts',
+    pathMatch: 'full'
+  },
+  {
     path :'posts',
-    component : PostComponent,
+    component : PostOverviewComponent,
     data:{title:'Post'} 
+  },
+  {
+    path : 'post/:id', 
+    component : PostComponent,
+    data:{
+      post:{}
+    }
   }
 ]
 
@@ -21,7 +36,9 @@ const appRoutes: Routes = [
   declarations: [
     AppComponent,
     PostComponent,
-    AddCommentComponent
+    AddCommentComponent,
+    PostOverviewComponent,
+    CommentComponent
   ],
   imports: [
     RouterModule.forRoot(appRoutes),

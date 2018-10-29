@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { ForumAPIService } from '../forum-api.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { createWiresService } from 'selenium-webdriver/firefox';
@@ -30,24 +30,31 @@ export class AddCommentComponent implements OnInit {
     postId:0
   };
 
+  returnComment : any = {};
+
   constructor(
     public rest:ForumAPIService,
     public router:Router,
     public activatedRoute:ActivatedRoute
   ) { }
 
+  private counter : String = "123";
+
   ngOnInit() {
   }
-  private post(){
 
+  private post(){
     this.comment.postId = this.postinfo.postId;
     this.comment.user.userId = this.postinfo.user.userId;
-
 
     console.log(this.comment);
     if(this.comment.content != ""){
       this.rest.createComment(this.comment).subscribe((res)=> {
         console.log("Comment posted successfully");
+
+        this.returnComment = this.comment;
+
+        this.commentPosted.emit(this.returnComment);
       }, 
         (err) => {console.log(err);
       });
@@ -56,4 +63,5 @@ export class AddCommentComponent implements OnInit {
     }
   }
 
+  @Output() commentPosted : EventEmitter<any> = new EventEmitter();
 }

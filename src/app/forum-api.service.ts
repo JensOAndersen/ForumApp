@@ -26,22 +26,39 @@ export class ForumAPIService {
       return body || { };
     }
 
+  //Get all posts
   public getAllPosts() : Observable<any> {
     return this.http.get(endpoint+'/posts').pipe(map(this.extractData));
   }
 
-  public createPost(post){
+  //Get Post by ID
+  public getPostBy(id:Number){
+    console.log(endpoint+'/posts/'+id);
+    return this.http.get(endpoint+'/posts/'+id).pipe(map(this.extractData));
+  }
+
+  //create post
+  public createPost(post:Object){
     console.log(post);
     return this.http.post<any>(endpoint+'/posts', JSON.stringify(post), httpOptions).pipe(
       tap((post) => console.log('added post w/ id=${post.id}'))
     );
   }
 
-  public createComment(comment){
+  //create comment
+  public createComment(comment:Object){
     console.log(comment);
     return this.http.post<any>(endpoint + '/comments',JSON.stringify(comment),httpOptions).pipe(
       tap((comment) => console.log('added new comment w/ id=${comment.id}'))
     );
+  }
+
+  //delete comment
+  public deleteComment(id:Number){
+    return this.http.delete<any>(endpoint+'/comments/'+id, httpOptions)
+      .pipe(
+        tap(_ => console.log('deleted comment with id:' + id))
+      );
   }
 
   private handleError (error:Response|any){
