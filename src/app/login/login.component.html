@@ -1,0 +1,18 @@
+<form [formGroup]="loginForm" (ngSubmit)="onLogin()">
+  <label>
+    Username:
+    <input type="text" formControlName="name">
+  </label>
+  <label>
+    password:
+    <input type="password" formControlName="password">
+    <div *ngIf="submitted && loginForm.controls.password.errors">
+      <div *ngIf="loginForm.controls.password.errors.required">
+        password is required
+      </div>
+    </div>
+  </label>
+  <button [disabled]="submitClick">
+    Login
+  </button>
+</form>

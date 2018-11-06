@@ -45,7 +45,7 @@ export class AddCommentComponent implements OnInit {
 
   private post(){
     this.comment.postId = this.postinfo.postId;
-    this.comment.user.userId = this.postinfo.user.userId;
+    this.comment.user.userId = JSON.parse(localStorage.getItem('userInfo'));
 
     console.log(this.comment);
     if(this.comment.content != ""){

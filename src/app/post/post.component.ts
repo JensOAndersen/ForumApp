@@ -34,8 +34,6 @@ export class PostComponent implements OnInit {
     .subscribe(
       (data:{}) => {
         this.post = data;
-
-        console.log(this.post);
       }
     );
   }

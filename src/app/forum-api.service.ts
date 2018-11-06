@@ -39,17 +39,16 @@ export class ForumAPIService {
 
   //create post
   public createPost(post:Object){
-    console.log(post);
     return this.http.post<any>(endpoint+'/posts', JSON.stringify(post), httpOptions).pipe(
-      tap((post) => console.log('added post w/ id=${post.id}'))
+      tap((post) => console.log('added post w/ id='+post.id))
     );
   }
 
   //create comment
   public createComment(comment:Object){
-    console.log(comment);
     return this.http.post<any>(endpoint + '/comments',JSON.stringify(comment),httpOptions).pipe(
-      tap((comment) => console.log('added new comment w/ id=${comment.id}'))
+      //for some reason tap doesnt work?
+      tap((comment) => console.log('added new comment w/ id='+comment))
     );
   }
 
